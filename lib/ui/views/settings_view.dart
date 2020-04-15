@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:get/get.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 import 'package:provider_start/core/localization/localization.dart';
 import 'package:provider_start/core/view_models/settings_view_model.dart';
+import 'package:provider_start/core/extensions/build_context_ext.dart';
+import 'package:provider_start/ui/widgets/dialogs/confirm_dialog.dart';
 
 /// An example settings view that uses platform adaptive widgets
 /// and builds widgets using the `provider_architecture` package,
@@ -121,7 +124,15 @@ class _SignOutListTile extends ProviderWidget<SettingsViewModel> {
         onTap: model.signOut,
       ),
       ios: (_) => CupertinoButton(
-        onPressed: model.signOut,
+        onPressed: () => Get.dialog(ConfirmDialog(
+          title: local.settingsViewSignOut,
+          description: local.settingsViewSignOutDesc,
+          onConfirmed: () async {
+            Get.back();
+            await model.signOut();
+          },
+          onDenied: () => Get.back(),
+        )),
         child: Row(
           children: <Widget>[
             Text(
@@ -145,15 +156,33 @@ class _ShowSnackBarListTile extends ProviderWidget<SettingsViewModel> {
   Widget build(BuildContext context, SettingsViewModel model) {
     final local = AppLocalizations.of(context);
 
+    final onTap = () {
+      final textColor = context.isDark ? Colors.black : Colors.white;
+      final bgColor = context.isDark ? Colors.white : Colors.black;
+
+      Get.snackbar(
+        local.settingsViewSnackBar,
+        local.settingsViewSnackBarDesc,
+        icon: Icon(
+          Icons.check_circle_outline,
+          color: Colors.green,
+        ),
+        colorText: textColor,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: bgColor.withOpacity(0.7),
+        margin: const EdgeInsets.all(8),
+      );
+    };
+
     return PlatformWidget(
       android: (_) => ListTile(
         title: Text(local.settingsViewSnackBar),
         subtitle: Text(local.settingsViewSnackBarDesc),
         trailing: Icon(Icons.announcement),
-        onTap: model.showSnackbar,
+        onTap: onTap,
       ),
       ios: (_) => CupertinoButton(
-        onPressed: model.showSnackbar,
+        onPressed: onTap,
         child: Row(
           children: <Widget>[
             Text(

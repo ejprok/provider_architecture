@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:get/get.dart';
 import 'package:provider_start/core/constant/view_routes.dart';
 import 'package:provider_start/core/models/post/post.dart';
 import 'package:provider_start/ui/views/login_view.dart';
@@ -13,34 +13,28 @@ import 'package:provider_start/ui/views/start_up_view.dart';
 ///   - Routes can also require parameters. e.g. `PostDetailView(post: post)`
 class Router {
   static Route<dynamic> generateRoute(
-    BuildContext context,
     RouteSettings settings,
   ) {
-    return platformPageRoute(
-      context: context,
-      settings: RouteSettings(name: settings.name),
-      builder: (context) => _generateView(settings),
+    return GetRoute(
+      page: _generateView(settings),
       fullscreenDialog: _fullScreenDialogs.contains(settings.name),
+      transition: Transition.cupertino,
     );
   }
 
   static Widget _generateView(RouteSettings settings) {
     switch (settings.name) {
-
-      // Tab Views
       case ViewRoutes.main:
         return MainView();
       case ViewRoutes.login:
         return LoginView();
-
       case ViewRoutes.splash:
         return StartUpView();
       case ViewRoutes.post_details:
         final post = settings.arguments as Post;
         return PostDetailsView(post: post);
-
       default:
-        return Scaffold(
+        return PlatformScaffold(
           body: Center(
             child: Text('No route defined for ${settings.name}'),
           ),
