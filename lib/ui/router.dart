@@ -18,7 +18,6 @@ class Router {
     return GetRoute(
       page: _generateView(settings),
       fullscreenDialog: _fullScreenDialogs.contains(settings.name),
-      transition: Transition.cupertino,
     );
   }
 
@@ -28,7 +27,7 @@ class Router {
         return MainView();
       case ViewRoutes.login:
         return LoginView();
-      case ViewRoutes.splash:
+      case ViewRoutes.startup:
         return StartUpView();
       case ViewRoutes.post_details:
         final post = settings.arguments as Post;

@@ -113,6 +113,18 @@ class _SignOutListTile extends ProviderWidget<SettingsViewModel> {
   Widget build(BuildContext context, SettingsViewModel model) {
     final local = AppLocalizations.of(context);
 
+    final onTap = () {
+      Get.dialog(ConfirmDialog(
+        title: local.settingsViewSignOut,
+        description: local.settingsViewSignOutDesc,
+        onConfirmed: () async {
+          Get.back();
+          await model.signOut();
+        },
+        onDenied: () => Get.back(),
+      ));
+    };
+
     return PlatformWidget(
       android: (_) => ListTile(
         title: Text(local.settingsViewSignOut),
@@ -121,18 +133,10 @@ class _SignOutListTile extends ProviderWidget<SettingsViewModel> {
           android: (_) => Icon(Icons.exit_to_app),
           ios: (_) => Icon(CupertinoIcons.right_chevron),
         ),
-        onTap: model.signOut,
+        onTap: onTap,
       ),
       ios: (_) => CupertinoButton(
-        onPressed: () => Get.dialog(ConfirmDialog(
-          title: local.settingsViewSignOut,
-          description: local.settingsViewSignOutDesc,
-          onConfirmed: () async {
-            Get.back();
-            await model.signOut();
-          },
-          onDenied: () => Get.back(),
-        )),
+        onPressed: onTap,
         child: Row(
           children: <Widget>[
             Text(
