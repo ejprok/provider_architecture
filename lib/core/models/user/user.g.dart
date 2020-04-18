@@ -6,7 +6,7 @@ part of 'user.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<User> _$userSerializer = new _$UserSerializer();
+Serializer<User> _$userSerializer = _$UserSerializer();
 
 class _$UserSerializer implements StructuredSerializer<User> {
   @override
@@ -51,7 +51,7 @@ class _$UserSerializer implements StructuredSerializer<User> {
   @override
   User deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new UserBuilder();
+    final result = UserBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -105,19 +105,19 @@ class _$User extends User {
   final String website;
 
   factory _$User([void Function(UserBuilder) updates]) =>
-      (new UserBuilder()..update(updates)).build();
+      (UserBuilder()..update(updates)).build();
 
   _$User._(
       {this.id, this.username, this.email, this.name, this.phone, this.website})
       : super._() {
     if (id == null) {
-      throw new BuiltValueNullFieldError('User', 'id');
+      throw BuiltValueNullFieldError('User', 'id');
     }
     if (username == null) {
-      throw new BuiltValueNullFieldError('User', 'username');
+      throw BuiltValueNullFieldError('User', 'username');
     }
     if (email == null) {
-      throw new BuiltValueNullFieldError('User', 'email');
+      throw BuiltValueNullFieldError('User', 'email');
     }
   }
 
@@ -126,7 +126,7 @@ class _$User extends User {
       (toBuilder()..update(updates)).build();
 
   @override
-  UserBuilder toBuilder() => new UserBuilder()..replace(this);
+  UserBuilder toBuilder() => UserBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -210,7 +210,7 @@ class UserBuilder implements Builder<User, UserBuilder> {
   @override
   void replace(User other) {
     if (other == null) {
-      throw new ArgumentError.notNull('other');
+      throw ArgumentError.notNull('other');
     }
     _$v = other as _$User;
   }
@@ -223,7 +223,7 @@ class UserBuilder implements Builder<User, UserBuilder> {
   @override
   _$User build() {
     final _$result = _$v ??
-        new _$User._(
+        _$User._(
             id: id,
             username: username,
             email: email,

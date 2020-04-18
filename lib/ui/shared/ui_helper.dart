@@ -36,7 +36,7 @@ class UIHelper {
 
   /// Returns a vertical space equal to the [height] supplied
   static Widget verticalSpace(double height) {
-    return Container(height: height);
+    return SizedBox(height: height);
   }
 
   /// Returns a vertical space with height set to [_HorizontalSpaceSmall]
@@ -61,6 +61,6 @@ class UIHelper {
 
   /// Returns a vertical space equal to the [width] supplied
   static Widget horizontalSpace(double width) {
-    return Container(width: width);
+    return SizedBox(width: width);
   }
 }
