@@ -6,7 +6,7 @@ part of 'post.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Post> _$postSerializer = new _$PostSerializer();
+Serializer<Post> _$postSerializer = _$PostSerializer();
 
 class _$PostSerializer implements StructuredSerializer<Post> {
   @override
@@ -36,7 +36,7 @@ class _$PostSerializer implements StructuredSerializer<Post> {
   @override
   Post deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PostBuilder();
+    final result = PostBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -78,20 +78,20 @@ class _$Post extends Post {
   final int userId;
 
   factory _$Post([void Function(PostBuilder) updates]) =>
-      (new PostBuilder()..update(updates)).build();
+      (PostBuilder()..update(updates)).build();
 
   _$Post._({this.id, this.title, this.description, this.userId}) : super._() {
     if (id == null) {
-      throw new BuiltValueNullFieldError('Post', 'id');
+      throw BuiltValueNullFieldError('Post', 'id');
     }
     if (title == null) {
-      throw new BuiltValueNullFieldError('Post', 'title');
+      throw BuiltValueNullFieldError('Post', 'title');
     }
     if (description == null) {
-      throw new BuiltValueNullFieldError('Post', 'description');
+      throw BuiltValueNullFieldError('Post', 'description');
     }
     if (userId == null) {
-      throw new BuiltValueNullFieldError('Post', 'userId');
+      throw BuiltValueNullFieldError('Post', 'userId');
     }
   }
 
@@ -100,7 +100,7 @@ class _$Post extends Post {
       (toBuilder()..update(updates)).build();
 
   @override
-  PostBuilder toBuilder() => new PostBuilder()..replace(this);
+  PostBuilder toBuilder() => PostBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -165,7 +165,7 @@ class PostBuilder implements Builder<Post, PostBuilder> {
   @override
   void replace(Post other) {
     if (other == null) {
-      throw new ArgumentError.notNull('other');
+      throw ArgumentError.notNull('other');
     }
     _$v = other as _$Post;
   }
@@ -178,7 +178,7 @@ class PostBuilder implements Builder<Post, PostBuilder> {
   @override
   _$Post build() {
     final _$result = _$v ??
-        new _$Post._(
+        _$Post._(
             id: id, title: title, description: description, userId: userId);
     replace(_$result);
     return _$result;

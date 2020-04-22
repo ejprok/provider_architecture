@@ -1,2 +1,2 @@
 #!/bin/sh
-exec flutter format lib/ test/
+exec flutter format lib/ test/ --fix
