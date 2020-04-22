@@ -18,4 +18,10 @@ class StartUpViewModel extends BaseViewModel {
       unawaited(_navigationService.pushReplacementNamed(ViewRoutes.login));
     }
   }
+
+  @override
+  void dispose() {
+    print("i should be disposing");
+    super.dispose();
+  }
 }
